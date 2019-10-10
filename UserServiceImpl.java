@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 //	}
 //
 	public UserVO login(String user_id, String pwd) {
-		return dao.login(userid, userpwd);
+		return dao.login(user_id, pwd);
 	}
 //
 //	public List<UserVO> getUserList() {
