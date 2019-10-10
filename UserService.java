@@ -10,6 +10,6 @@ public interface UserService {
 	public int addUser(UserVO user) throws ParseException;
 //	public int modifyUser(UserVO user);
 //	public UserVO getUser(String userid);
-	public UserVO login(String userid, String userpwd);
+	public UserVO login(String user_id, String pwd);
 //	public List<UserVO> getUserList();
 }
