@@ -20,11 +20,11 @@ public class UserDAO {
 		return sqlSession.selectList("lab.mybatis.user.UserMapper.getYoutuberList");
 	}
 	
-	public UserVO login(String userid, String userpwd) {
+	public UserVO login(String user_id, String pwd) {
 		Object vo = null;
 		HashMap<String, String> hm = new HashMap<String, String>();
-		hm.put("userid", userid);
-		hm.put("userpwd", userpwd);
+		hm.put("user_id", user_id);
+		hm.put("pwd", pwd);
 		vo = sqlSession.selectOne("lab.mybatis.user.UserMapper.login", hm);
 		return (UserVO)vo; 
 	}
