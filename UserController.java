@@ -42,8 +42,44 @@ public class UserController {
 ////	      return mav; 
 ////	   }	
 ////	
-//	
-	//È¸¿ø°¡ÀÔ
+	
+	//ë¡œê·¸ì¸
+		@RequestMapping(value="/login.do", method=RequestMethod.GET)
+	public ModelAndView form() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("login");
+		return mav; 
+	}
+	
+	@RequestMapping(value="/login.do", method=RequestMethod.POST)
+	public ModelAndView login(@RequestParam("user_id")String user_id,
+							  @RequestParam("pwd")String pwd,
+							  HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		UserVO vo = null;
+		vo = service.login(user_id, pwd);
+		session.setAttribute("vo", vo); 
+		mav.addObject("user", vo);
+		if(vo!=null) {
+			mav.setViewName("main2");
+		} else {
+			mav.setViewName("loginFail");
+		}
+		return mav;
+	} 
+	
+	@RequestMapping(value="/logout.do")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:main.do";
+	}
+	
+	
+	
+	
+	
+	
+	//íšŒì›ê°€ì…
 	@RequestMapping(value="/join.do", method=RequestMethod.GET)
 	public ModelAndView getjoin() {
 		ModelAndView mav = new ModelAndView();
@@ -54,7 +90,7 @@ public class UserController {
 	public ModelAndView postjoin(UserVO vo) throws ParseException {
 		ModelAndView mav = new ModelAndView();
 		if(service.addUser(vo)>0) {
-			mav.setViewName("main2"); //·Î±×ÀÎÀ¸·Î º¸³»¾ßÇÔ
+			mav.setViewName("main2"); //ë¡œê·¸ì¸ìœ¼ë¡œ ë³´ë‚´ì•¼í•¨
 		}else {
 			mav.setViewName("joinForm");
 		}
@@ -62,7 +98,7 @@ public class UserController {
 	}
 
    
-////////////////////////ë©”ì¸/////////////////////
+////////////////////////ï§Â”Â/////////////////////
 ////	@RequestMapping(value="/main.do", method=RequestMethod.GET)
 ////	public ModelAndView userList(HttpSession session) {
 ////		ModelAndView mav = new ModelAndView();
