@@ -61,7 +61,7 @@ public class UserController {
 		session.setAttribute("vo", vo); 
 		mav.addObject("user", vo);
 		if(vo!=null) {
-			mav.setViewName("main2");
+			mav.setViewName("redirect:/main.do");
 		} else {
 			mav.setViewName("loginFail");
 		}
